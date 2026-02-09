@@ -1,0 +1,16 @@
+D:\Pruebas\AXPO2\ConsoleApp1\ClassLibrary1\bin\Debug\net8.0\Data.deps.json
+D:\Pruebas\AXPO2\ConsoleApp1\ClassLibrary1\bin\Debug\net8.0\Data.dll
+D:\Pruebas\AXPO2\ConsoleApp1\ClassLibrary1\bin\Debug\net8.0\Data.pdb
+D:\Pruebas\AXPO2\ConsoleApp1\ClassLibrary1\bin\Debug\net8.0\PowerService.dll
+D:\Pruebas\AXPO2\ConsoleApp1\ClassLibrary1\bin\Debug\net8.0\PowerService.pdb
+D:\Pruebas\AXPO2\ConsoleApp1\ClassLibrary1\obj\Debug\net8.0\Data.csproj.AssemblyReference.cache
+D:\Pruebas\AXPO2\ConsoleApp1\ClassLibrary1\obj\Debug\net8.0\Data.GeneratedMSBuildEditorConfig.editorconfig
+D:\Pruebas\AXPO2\ConsoleApp1\ClassLibrary1\obj\Debug\net8.0\Data.AssemblyInfoInputs.cache
+D:\Pruebas\AXPO2\ConsoleApp1\ClassLibrary1\obj\Debug\net8.0\Data.AssemblyInfo.cs
+D:\Pruebas\AXPO2\ConsoleApp1\ClassLibrary1\obj\Debug\net8.0\Data.csproj.CoreCompileInputs.cache
+D:\Pruebas\AXPO2\ConsoleApp1\ClassLibrary1\obj\Debug\net8.0\Data.sourcelink.json
+D:\Pruebas\AXPO2\ConsoleApp1\ClassLibrary1\obj\Debug\net8.0\Data.csproj.Up2Date
+D:\Pruebas\AXPO2\ConsoleApp1\ClassLibrary1\obj\Debug\net8.0\Data.dll
+D:\Pruebas\AXPO2\ConsoleApp1\ClassLibrary1\obj\Debug\net8.0\refint\Data.dll
+D:\Pruebas\AXPO2\ConsoleApp1\ClassLibrary1\obj\Debug\net8.0\Data.pdb
+D:\Pruebas\AXPO2\ConsoleApp1\ClassLibrary1\obj\Debug\net8.0\ref\Data.dll

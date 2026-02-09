@@ -1,0 +1,11 @@
+{
+  "SavePath": "D:\\TempPruebas\\",
+  "TimeInterval": "30000",
+  "FileNameDateFormat": "yyyyMMdd",
+  "FileNameTimeFormat": "HHmm",
+  "FileName": "PowerPosition_{0}_{1}",
+  "Headers": "Local Time;Volume",
+  "LogFilePath": "D:\\TempPruebas\\",
+  "LogFileName": "Log_{0}",
+  "DateFormat": "dd/MM/yyyy"
+}
