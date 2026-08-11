@@ -34,7 +34,7 @@ namespace Business.Process
 
         private void StartProcessing()
         {
-            var date = DateTime.Parse(DateTime.Now.ToString(_configurationParameters.DateFormat), CultureInfo.InvariantCulture);
+            var date = CreateUTCTime(); 
             try
             {
                 _logger.Info(string.Format("{1} - {0}:Starting Process", DateTime.Now, this.GetType().ToString()));
@@ -71,7 +71,7 @@ namespace Business.Process
 
         private async Task StartProcessAsync()
         {
-            var date = DateTime.Parse(DateTime.Now.ToString(_configurationParameters.DateFormat), CultureInfo.InvariantCulture);
+            var date = CreateUTCTime();
             try
             {
                 _logger.Info(string.Format("{1} - {0}:Starting Process", DateTime.Now, this.GetType().ToString()));
@@ -90,6 +90,10 @@ namespace Business.Process
         }
 
         #endregion
-
+        private DateTime  CreateUTCTime()
+        {
+            DateTime horaUtc = TimeZoneInfo.ConvertTimeToUtc(DateTime.Now, TimeZoneInfo.Local);
+            return DateTime.Parse(horaUtc.ToString(_configurationParameters.DateFormat), CultureInfo.InvariantCulture);
+        } 
     }
 }

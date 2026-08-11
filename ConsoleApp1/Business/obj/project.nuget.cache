@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "KKhmV1/0sm4=",
+  "dgSpecHash": "QN2z/ivWGRA=",
   "success": true,
-  "projectFilePath": "D:\\Pruebas\\AXPO2\\ConsoleApp1\\Business\\Business.csproj",
+  "projectFilePath": "D:\\Pruebas\\AXPO\\AXPO\\ConsoleApp1\\Business\\Business.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\marco\\.nuget\\packages\\freedataexports\\1.1.12\\freedataexports.1.1.12.nupkg.sha512",
     "C:\\Users\\marco\\.nuget\\packages\\microsoft.extensions.configuration\\9.0.3\\microsoft.extensions.configuration.9.0.3.nupkg.sha512",

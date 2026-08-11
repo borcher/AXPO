@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using FreeDataExports;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using FreeDataExports.Delimited;
 
 namespace Business.Process
 {
@@ -18,6 +19,7 @@ namespace Business.Process
         private IDataWorkbook workbook;
         private IConfigurationParameters _configurationParameters;
         private IDataWorksheet dataPowerTrade;
+        private Csv dataExported;
         private string path; 
 
         public ExcelManager(ILogger logger, IConfigurationParameters configurationParameters) {
@@ -35,16 +37,15 @@ namespace Business.Process
 
         private void SaveFile()
         {
-            workbook.GetBytes();
             _logger.Info(string.Format("{1} - Saving Excel file in {0}", path, this.GetType().ToString()));
-            workbook.Save(path);
+            dataExported.Save(path);
             _logger.Info((string.Format("{1} - Data Saved on {0}", path, this.GetType().ToString())));
         }
 
         private string CreatePath()
         {
             string filename = _configurationParameters.OutputFileName;
-            filename = string.Format(filename, DateTime.Now.ToString(_configurationParameters.OutputFileNameDateFormat), DateTime.Now.ToString(_configurationParameters.OutputFileNameTimeFormat)) + ".xlsx";
+            filename = string.Format(filename, DateTime.Now.ToString(_configurationParameters.OutputFileNameDateFormat), DateTime.Now.ToString(_configurationParameters.OutputFileNameTimeFormat)) + ".csv";
             var path = _configurationParameters.OutputSavePath + filename;
             return path;
         }
@@ -53,20 +54,13 @@ namespace Business.Process
         {
             if (!File.Exists(path))
             {
-                workbook = new DataExport().CreateXLSX2019();
+                dataExported = new DataExport().CreateCsv();
             }
-            workbook.FontSize = 11;
-            _logger.Info(string.Format("{0} - Create Excel file at {1}",this.GetType().ToString(),DateTime.Now));
-            // Create worksheets
-            dataPowerTrade = workbook.AddWorksheet(string.Format("DataPowerTrade_{0}",DateTime.Now.ToString("hhmmss")));
-            dataPowerTrade.AddRow()
-                 .AddCell(_configurationParameters.HeadersTitle.Split(';')[0], DataType.String)
-                 .AddCell(_configurationParameters.HeadersTitle.Split(';')[1], DataType.String);
+            string[] title = _configurationParameters.HeadersTitle.Split(';');
+            dataExported.AddRow(title[0], title[1]);
             foreach (DataRow row in data.Rows)
             {
-                dataPowerTrade.AddRow()
-                    .AddCell(row[0], DataType.String)
-                    .AddCell(row[1], DataType.Number);
+                dataExported.AddRow(row[0], row[1]);
             }
         }
     }

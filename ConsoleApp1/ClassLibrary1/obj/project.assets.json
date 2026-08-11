@@ -1,5 +1,5 @@
 {
-  "version": 3,
+  "version": 4,
   "targets": {
     "net8.0": {}
   },
@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Pruebas\\AXPO2\\ConsoleApp1\\ClassLibrary1\\Data.csproj",
+      "projectUniqueName": "D:\\Pruebas\\AXPO\\AXPO\\ConsoleApp1\\ClassLibrary1\\Data.csproj",
       "projectName": "Data",
-      "projectPath": "D:\\Pruebas\\AXPO2\\ConsoleApp1\\ClassLibrary1\\Data.csproj",
+      "projectPath": "D:\\Pruebas\\AXPO\\AXPO\\ConsoleApp1\\ClassLibrary1\\Data.csproj",
       "packagesPath": "C:\\Users\\marco\\.nuget\\packages\\",
-      "outputPath": "D:\\Pruebas\\AXPO2\\ConsoleApp1\\ClassLibrary1\\obj\\",
+      "outputPath": "D:\\Pruebas\\AXPO\\AXPO\\ConsoleApp1\\ClassLibrary1\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -38,6 +38,7 @@
       },
       "frameworks": {
         "net8.0": {
+          "framework": "net8.0",
           "targetAlias": "net8.0",
           "projectReferences": {}
         }
@@ -52,10 +53,11 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.200"
+      "SdkAnalysisLevel": "10.0.300"
     },
     "frameworks": {
       "net8.0": {
+        "framework": "net8.0",
         "targetAlias": "net8.0",
         "imports": [
           "net461",
@@ -73,7 +75,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.203/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.301/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
