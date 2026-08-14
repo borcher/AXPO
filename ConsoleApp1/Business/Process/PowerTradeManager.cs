@@ -1,7 +1,7 @@
 ﻿using Axpo;
-using Business.Configuration;
+using Tools.Configuration;
+using Tools.Interface;
 using Business.Interface;
-using Data;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -23,16 +23,18 @@ namespace Business.Process
 
         #region Sync
 
-        public DataTable StartProcessingPowerTrades(string Headers, DateTime date) {
-            _headers = Headers;
-           return ProcessResult(GetPowerTrades(date));
+        public DataTable StartProcessingPowerTrades(string Headers, DateTime date)
+        {
+            //_headers = Headers;
+            //return ProcessResult(GetPowerTrades(date));
+            return null;
         }
 
-        private List<PowerTrade> GetPowerTrades(DateTime date)
-        {
-            _logger.Info(string.Format("{1} - Getting List of Power Trades at  {0}", DateTime.Now.ToString(),this.GetType().ToString()));
-            return Connection.GetTrades(date).ToList();
-        }
+        //private List<PowerTrade> GetPowerTrades(DateTime date)
+        //{
+        //    _logger.Info(string.Format("{1} - Getting List of Power Trades at  {0}", DateTime.Now.ToString(),this.GetType().ToString()));
+        //    return Connection.GetTrades(date).ToList();
+        //}
 
         #endregion
 
@@ -41,14 +43,15 @@ namespace Business.Process
         public async Task<DataTable> StartProcessingPowerTradesAsync(string Headers, DateTime date)
         {
             _headers = Headers;
-            return ProcessResult(await GetPowerTradesAsync(date));
+            return null;
+                //ProcessResult(await GetPowerTradesAsync(date));
         }
 
-        private Task<List<PowerTrade>> GetPowerTradesAsync(DateTime date)
-        {
-            _logger.Info(string.Format("{1} - Getting List of Power Trades at  {0}", DateTime.Now.ToString(), this.GetType().ToString()));
-            return Task.FromResult(Connection.GetTradesAsync(date).Result.ToList());
-        }
+        //private  Task<List<PowerTrade>> GetPowerTradesAsync(DateTime date)
+        //{
+        //    _logger.Info(string.Format("{1} - Getting List of Power Trades at  {0}", DateTime.Now.ToString(), this.GetType().ToString()));
+        //    return Task.FromResult(Connection.GetTradesAsync(date).Result.ToList());
+        //}
 
         #endregion
 

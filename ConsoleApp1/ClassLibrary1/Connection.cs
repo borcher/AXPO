@@ -1,18 +1,15 @@
 ﻿using Axpo;
+using Data.Interfaces;
 
 namespace Data
 {
-    public static class Connection
+    public class Connection :IConnection
     {
-        public static IEnumerable<PowerTrade> GetTrades(DateTime date) {
-            PowerService p=new PowerService();    
-             return p.GetTrades(date);   
-        }
-
-        public async static Task<IEnumerable<PowerTrade>> GetTradesAsync(DateTime date)
+        public async Task<IEnumerable<PowerTrade>> GetTradesAsync(DateTime date)
         {
             PowerService p = new PowerService();
-            return await p.GetTradesAsync(date);
+            var test=await p.GetTradesAsync(date);
+            return test;
         }
     }
 }

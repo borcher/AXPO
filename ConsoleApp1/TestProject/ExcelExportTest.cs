@@ -1,4 +1,5 @@
 using Business.Interface;
+using Tools.Interface;
 using Business.Process;
 using FreeDataExports;
 using Moq;
@@ -8,7 +9,7 @@ namespace TestProject
 {
     public class ExcelExportTest
     {
-        ExcelManager excelManager;
+        CsvManager excelManager;
        
         private IDataWorkbook workbook;
         private IConfigurationParameters _configurationParameters;
@@ -17,9 +18,9 @@ namespace TestProject
         public void ExcelExport_ReturnsException_WhenConfigurationParametersAreNull()
         {
             var _logger = new Mock<ILogger>();
-            excelManager = new ExcelManager(_logger.Object, null);
+            excelManager = new CsvManager(_logger.Object, null);
             DataTable dataTable = new DataTable();
-            Assert.Throws<NullReferenceException>(() => excelManager.ExportToExcel(dataTable));
+            Assert.ThrowsAsync<NullReferenceException>(() => excelManager.ExportToExcel(dataTable,""));
         }
 
         [Fact]
@@ -35,9 +36,9 @@ namespace TestProject
             Configuration.Setup(c => c.OutputFileNameTimeFormat).Returns("HHmm");
             Configuration.Setup(c => c.OutputFileName).Returns("Test");
 
-            excelManager = new ExcelManager(_logger.Object, Configuration.Object);
+            excelManager = new CsvManager(_logger.Object, Configuration.Object);
             DataTable dataTable = new DataTable();
-            Assert.Throws<NullReferenceException>(() => excelManager.ExportToExcel(null));
+            Assert.ThrowsAsync<NullReferenceException>(() => excelManager.ExportToExcel(null,""));
         }
     }
 }

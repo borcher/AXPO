@@ -1,15 +1,5 @@
-﻿using Business.Configuration;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
-using Serilog;
-using Serilog.Core;
-using Serilog.Debugging;
-using Serilog.Events;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Serilog;
+using Tools.Interface;
 
 
 namespace Business.Interface
@@ -19,9 +9,12 @@ namespace Business.Interface
         private  Serilog.ILogger _logger;
 
         public Logger(IConfigurationParameters configurationParameters) {
+
+            string fullLogPath = Path.Combine(configurationParameters.LogFilePath,configurationParameters.LogfileName + ".log" );
+
             _logger = new LoggerConfiguration()
             .WriteTo.Console()
-            .WriteTo.File(configurationParameters.LogFilePath + configurationParameters.LogfileName + ".log",
+            .WriteTo.File(fullLogPath,
             rollingInterval: RollingInterval.Day)
             .CreateLogger();
         }

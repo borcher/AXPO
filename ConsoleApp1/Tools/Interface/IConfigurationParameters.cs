@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Business.Interface
+namespace Tools.Interface
 {
     public interface IConfigurationParameters
     {
@@ -17,6 +17,8 @@ namespace Business.Interface
         public string LogFilePath { get; set; }
         public string LogfileName { get; set; }
         public string DateFormat { get; set; }
+        public string BaseUrlhttp { get; set; }
+        public string BaseUrlhttps { get; set; }
     }
 }
 

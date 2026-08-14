@@ -1,8 +1,6 @@
-﻿
+﻿using Tools.Interface;
 
-using Business.Interface;
-
-namespace Business.Configuration
+namespace Tools.Configuration
 {
     public class ConfigurationParameters: IConfigurationParameters
     {
@@ -15,5 +13,7 @@ namespace Business.Configuration
         public string LogFilePath { get; set; }
         public string LogfileName { get; set;}
         public string DateFormat {  get; set; }
+        public string BaseUrlhttp { get; set; }
+        public string BaseUrlhttps { get; set; }
     }
 }

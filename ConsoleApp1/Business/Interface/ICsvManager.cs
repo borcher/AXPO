@@ -1,5 +1,5 @@
 ﻿using Axpo;
-using Business.Configuration;
+using Tools.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 
 namespace Business.Interface
 {
-    public interface IExcelManager
+    public interface ICsvManager
     {
-        void ExportToExcel(DataTable data);
+        Task ExportToExcel(DataTable data, string userPath);
     }
 }

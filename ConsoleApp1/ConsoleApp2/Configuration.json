@@ -7,5 +7,7 @@
   "Headers": "Local Time;Volume",
   "LogFilePath": "D:\\TempPruebas\\",
   "LogFileName": "Log_{0}",
-  "DateFormat": "dd/MM/yyyy"
+  "DateFormat": "dd/MM/yyyy",
+  "BaseUrlhttp": "http://localhost:5126",
+  "BaseUrlhttps": "https://localhost:7204"
 }

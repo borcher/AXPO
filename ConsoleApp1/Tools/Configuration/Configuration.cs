@@ -1,13 +1,7 @@
-﻿using Business.Interface;
-using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.Extensions.Configuration;
 
-namespace Business.Configuration
+
+namespace Tools.Configuration
 {
     public class Configuration: Interface.IConfiguration
     {
@@ -30,10 +24,24 @@ namespace Business.Configuration
                 HeadersTitle= configuration["Headers"],
                 LogfileName =string.Format(configuration["LogFileName"], DateTime.Now.ToString(configuration["FileNameDateFormat"])),
                 LogFilePath = configuration["LogFilePath"],
-                DateFormat = configuration["DateFormat"]
+                DateFormat = configuration["DateFormat"],
+                BaseUrlhttp = configuration["BaseUrlhttp"],
+                BaseUrlhttps = configuration["BaseUrlhttps"]
             };
         }
-       
+        public ConfigurationParameters LoadURLSettings()
+        {
+            var configuration = _configurationBuilder.AddJsonFile("Configuration.json").Build();
+
+            return new ConfigurationParameters()
+            {
+                TimeInterval = int.Parse(configuration["TimeInterval"]),
+                BaseUrlhttp = configuration["BaseUrlhttp"],
+                BaseUrlhttps = configuration["BaseUrlhttps"]
+            };
+        }
+
+
     }
 
 
