@@ -8,7 +8,7 @@ namespace Tools.Configuration
         public string OutputFileNameDateFormat { get; set; }
         public string OutputFileNameTimeFormat { get; set; }
         public string OutputSavePath { get; set; }
-        public int TimeInterval { get; set; }
+        public decimal TimeInterval { get; set; }
         public string HeadersTitle { get; set; }
         public string LogFilePath { get; set; }
         public string LogfileName { get; set;}

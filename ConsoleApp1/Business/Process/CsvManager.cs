@@ -14,7 +14,7 @@ using FreeDataExports.Delimited;
 
 namespace Business.Process
 {
-    public  class CsvManager: ICsvManager
+    public  class CsvManager: ICsvManager, IExportWriter
     {
         private ILogger _logger;
         private IDataWorkbook workbook;
@@ -30,10 +30,16 @@ namespace Business.Process
 
         public async Task ExportToExcel (DataTable data, string userPath)
         { 
+            // preserve existing contract
+            await ExportAsync(data, userPath).ConfigureAwait(false);
+        }
+
+        public async Task ExportAsync(DataTable data, string userPath)
+        {
             _logger.Info(string.Format("{0} -  Load data in Excel file at {1}", this.GetType().ToString(),DateTime.Now));
-            await ManagePath(userPath);
-            await CreateWorkSheet(data);
-            await SaveFile();
+            await ManagePath(userPath).ConfigureAwait(false);
+            await CreateWorkSheet(data).ConfigureAwait(false);
+            await SaveFile().ConfigureAwait(false);
         }
 
         private async Task ManagePath(string userPath)

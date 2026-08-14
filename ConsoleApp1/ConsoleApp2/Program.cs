@@ -43,6 +43,9 @@ namespace ConsoleApp2
             // Registrar MainManager como Singleton
             services.AddSingleton<MainManager>();
 
+            // Registrar Scheduler
+            services.AddSingleton<IScheduler, Scheduler>();
+
             // Registrar IProcessManager 
             services.AddTransient<IProcessManager>(provider =>
             {
@@ -53,14 +56,9 @@ namespace ConsoleApp2
                 return new ProcessManager(mainManager.ConfigurationParameters, logger, connection);
             });
 
-            // Registrar ICsvManager 
-            services.AddTransient<ICsvManager>(provider =>
-            {
-                var mainManager = provider.GetRequiredService<MainManager>();
-                var logger = provider.GetRequiredService<ILogger>();
-
-                return new CsvManager(logger, mainManager.ConfigurationParameters);
-            });
+            // Registrar ICsvManager and IExportWriter (CsvManager implements both)
+            services.AddTransient<ICsvManager, CsvManager>();
+            services.AddTransient<IExportWriter, CsvManager>();
 
             var serviceProvider = services.BuildServiceProvider();
 

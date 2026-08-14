@@ -11,7 +11,6 @@ namespace Tools.Interface
     public interface IConfiguration
     {
         ConfigurationParameters LoadSettings();
-        ConfigurationParameters LoadURLSettings();
     }
    
 }

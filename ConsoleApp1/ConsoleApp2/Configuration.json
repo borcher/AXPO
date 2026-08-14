@@ -1,6 +1,6 @@
 {
   "SavePath": "D:\\TempPruebas\\",
-  "TimeInterval": "30000",
+  "TimeInterval": "0.5",
   "FileNameDateFormat": "yyyyMMdd",
   "FileNameTimeFormat": "HHmm",
   "FileName": "PowerPosition_{0}_{1}",

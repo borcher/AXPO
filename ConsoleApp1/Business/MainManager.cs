@@ -11,6 +11,7 @@ namespace Business
         private readonly IConfigurationBuilder _configurationBuilder;
         private readonly Tools.Interface.IConfiguration _configuration;
         private readonly ILogger _logger;
+        private readonly IScheduler _scheduler;
         private IConfigurationParameters _configurationParameters;
         private ICsvManager _csvManager;
         private IProcessManager _ProcessManager;
@@ -19,11 +20,12 @@ namespace Business
 
         public IConfigurationParameters ConfigurationParameters => _configurationParameters;
 
-        public MainManager( ILogger logger,  Tools.Interface.IConfiguration configuration, IConfigurationBuilder configBuilder ) 
+        public MainManager( ILogger logger,  Tools.Interface.IConfiguration configuration, IConfigurationBuilder configBuilder, IScheduler scheduler ) 
         {
             _logger = logger;
             _configurationBuilder = configBuilder; 
             _configuration = configuration;
+            _scheduler = scheduler;
             _configurationParameters = _configuration.LoadSettings();
         }
 
@@ -45,12 +47,11 @@ namespace Business
             }
             if (_intervalMs==0)
             {
-                _intervalMs = _configurationParameters.TimeInterval;
+                _intervalMs = (int)(_configurationParameters.TimeInterval * 60 * 1000);
             }
         }
 
         public async Task ExportToCsvTradeInformation()
-            
         {
             try
             {
@@ -62,36 +63,30 @@ namespace Business
                     await _csvManager.ExportToExcel(data, _path).ConfigureAwait(false);
                 }
 
-                _logger.Info($"Iniciando temporizador. Intervalo: {_intervalMs}ms");
+                _logger.Info($"Starting scheduler. Interval: {_intervalMs}ms");
 
-                using (var timer = new PeriodicTimer(TimeSpan.FromMilliseconds(_intervalMs)))
+                // Define the work to run periodically
+                Func<Task> work = async () =>
                 {
                     try
                     {
-                        while (await timer.WaitForNextTickAsync().ConfigureAwait(false))
+                        Console.Write($"Create new file at : {DateTime.Now.ToString()}" + Environment.NewLine);
+                        if (data != null) data.Rows.Clear();
+                        data = await _ProcessManager.StartProcessing().ConfigureAwait(false);
+                        if (data != null && data.Rows.Count > 0)
                         {
-                            try
-                            {
-                                Console.Write($"Create new file at : {DateTime.Now.ToString()}" + Environment.NewLine);
-                                if (data != null) data.Rows.Clear();
-                                data = await _ProcessManager.StartProcessing().ConfigureAwait(false);
-                                if (data != null && data.Rows.Count > 0)
-                                {
-                                    await _csvManager.ExportToExcel(data, _path).ConfigureAwait(false);
-                                }
-                                Console.Write($"End create new file at : {DateTime.Now.ToString() + Environment.NewLine}");
-                            }
-                            catch (Exception ex)
-                            {
-                                Console.Write($"Scheduled extract failed: {ex.Message}" + Environment.NewLine);
-                            }
+                            await _csvManager.ExportToExcel(data, _path).ConfigureAwait(false);
                         }
+                        Console.Write($"End create new file at : {DateTime.Now.ToString() + Environment.NewLine}");
                     }
-                    catch (OperationCanceledException)
+                    catch (Exception ex)
                     {
-                        Console.Write("Scheduler stopped" + Environment.NewLine);
+                        Console.Write($"Scheduled extract failed: {ex.Message}" + Environment.NewLine);
                     }
-                }
+                };
+
+                // Start scheduler - this call will run the work immediately and then periodically
+                await _scheduler.StartPeriodicAsync(work, TimeSpan.FromMilliseconds(_intervalMs)).ConfigureAwait(false);
             }
             catch (Exception ex)
             {
