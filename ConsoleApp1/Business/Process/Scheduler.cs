@@ -15,7 +15,6 @@ namespace Business.Process
 
         public async Task StartPeriodicAsync(Func<Task> work, TimeSpan interval)
         {
-            // Run first time immediately
             try
             {
                 await work().ConfigureAwait(false);
@@ -24,8 +23,6 @@ namespace Business.Process
             {
                 _logger?.Error($"Scheduler initial run failed: {ex.Message}");
             }
-
-            // Then run periodically
             using (var timer = new PeriodicTimer(interval))
             {
                 try
